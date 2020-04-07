@@ -5,6 +5,7 @@ const pct = document.getElementById('pct');
 let numOfCards = 18;
 let counter = 0;
 let attempts = 0;
+let matchedCount = 0;
 let iconArray = [
   'fa-archive',
   'fa-bug',
@@ -19,22 +20,21 @@ let iconArray = [
 
 const gameOperations = {
   setStats(matches) {
-    pct.textContent = parseFloat((matches.length / attempts) * 100).toFixed(2);
+    console.log(matches)
+    pct.textContent = parseFloat((matches / attempts) * 100).toFixed(2);
   },
   resetGame() {
     Array.from(container.querySelectorAll('.match')).forEach((match) => {
       match.classList.remove('match');
       match.classList.add('card');
-      gamesPlayed.textContent++;
     });
   }
 }
 
-const cardOperation = {
+const cardOperations = {
   flipCard(event) {
-    var cur = event.currentTarget;
-    var tgt = event.target;
-    let matches = document.querySelectorAll('.match');
+    const cur = event.currentTarget;
+    const tgt = event.target;
     if (tgt.classList.contains('card')) {
       tgt.classList.add('flip');
       counter++;
@@ -43,18 +43,18 @@ const cardOperation = {
       counter = 0;
       attempts++;
       tries.textContent = attempts;
-      var pair = Array.from(cur.querySelectorAll('.flip'));
-      var ID = pair.map(card => {
-        return card.dataset.id;
-      });
+      const pair = Array.from(cur.querySelectorAll('.flip'));
+      const ID = pair.map(card => card.dataset.id );
       setTimeout(() => {
         if (ID[0] === ID[1]) {
+          matchedCount++;
+          gameOperations.setStats(matchedCount);
           pair.forEach((card) => {
             card.classList.add('match');
             card.classList.remove('flip');
             card.classList.remove('card');
-            matches = document.querySelectorAll('.match');
-            if (matches.length === numOfCards) {
+            const matchedElements = document.querySelectorAll('.match');
+            if (matchedElements.length === numOfCards) {
               gamesPlayed.textContent++;
               gameOperations.resetGame();
             }
@@ -62,13 +62,11 @@ const cardOperation = {
         } else {
           pair.forEach(card => {
             card.classList.remove('flip');
-            // console.log(parseFloat((matches.length / points) * 100).toFixed(2))
-            // container.removeEventListener("click", this.flipCard);
           });
         }
-      }, 1000);
+      }, 750);
     }
-    stats.setStats(matches);
+    gameOperations.setStats(matchedCount);
   },
   shuffleCard(array) {
     for (let i = array.length - 1; i >= 0; i--) {
@@ -84,7 +82,7 @@ const cardOperation = {
 
 let cardArray = iconArray.concat(iconArray);
 let shuffled = cardArray;
-// let shuffled = cardOps.shuffleCard(cardArray);
+// let shuffled = cardOperations.shuffleCard(cardArray);
 for (let i = 0; i < cardArray.length; i++) {
   container.insertAdjacentHTML(
     "beforeend", `<div class='card'><i class='fas'></i></div>`
