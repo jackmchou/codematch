@@ -73,7 +73,7 @@ header {
 .match {
   cursor: default;
   background-color: #21D4FD;
-  background-image: linear-gradient(19deg, rgb(1, 43, 53) 0%, #B721FF 100%);
+  background-image: linear-gradient(19deg, rgb(39, 95, 109) 0%, #B721FF 100%);
   background-size: cover;
   background-position: center;
   background-attachment: fixed;

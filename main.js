@@ -17,13 +17,20 @@ let iconArray = [
   'fa-qrcode'
 ]
 
-let stats = {
+const gameOperations = {
   setStats(matches) {
     pct.textContent = parseFloat((matches.length / attempts) * 100).toFixed(2);
+  },
+  resetGame() {
+    Array.from(container.querySelectorAll('.match')).forEach((match) => {
+      match.classList.remove('match');
+      match.classList.add('card');
+      gamesPlayed.textContent++;
+    });
   }
 }
 
-let cardOps = {
+const cardOperation = {
   flipCard(event) {
     var cur = event.currentTarget;
     var tgt = event.target;
@@ -42,21 +49,22 @@ let cardOps = {
       });
       setTimeout(() => {
         if (ID[0] === ID[1]) {
-         pair.forEach((card) => {
-          card.classList.add('match');
-          card.classList.remove('flip');
-          card.classList.remove('card');
-          matches = document.querySelectorAll('.match');
-          if (matches.length === numOfCards) {
-            gamesPlayed.textContent++;
-          }
-         });
+          pair.forEach((card) => {
+            card.classList.add('match');
+            card.classList.remove('flip');
+            card.classList.remove('card');
+            matches = document.querySelectorAll('.match');
+            if (matches.length === numOfCards) {
+              gamesPlayed.textContent++;
+              gameOperations.resetGame();
+            }
+          });
         } else {
-         pair.forEach(card => {
-          card.classList.remove('flip');
-          // console.log(parseFloat((matches.length / points) * 100).toFixed(2))
-          // container.removeEventListener("click", this.flipCard);
-         });
+          pair.forEach(card => {
+            card.classList.remove('flip');
+            // console.log(parseFloat((matches.length / points) * 100).toFixed(2))
+            // container.removeEventListener("click", this.flipCard);
+          });
         }
       }, 1000);
     }
@@ -71,13 +79,6 @@ let cardOps = {
       // array.splice(array[i], (array[Math.random() * i | 0] - 1));
     }
     return array;
-  },
-  resetGame(array) {
-    Array.from(container.querySelectorAll('.match')).forEach((match) => {
-      match.classList.remove('match');
-      match.classList.add('card');
-      gamesPlayed.textContent++;
-    });
   }
 };
 
@@ -95,5 +96,4 @@ Array.from(container.querySelectorAll(".fas")).forEach((fas, i) => {
   let ID = shuffled[i].split("-");
   fas.parentElement.dataset.id = ID[1];
 });
-container.addEventListener("click", cardOps.flipCard);
-
+container.addEventListener("click", cardOperations.flipCard);
