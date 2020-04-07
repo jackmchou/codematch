@@ -1,30 +1,39 @@
-const container = document.querySelector('.container');
-const tries = document.querySelector("#tries");
-const gamesPlayed = document.getElementById('played');
-const pct = document.getElementById('pct');
-let numOfCards = 18;
-let counter = 0;
-let attempts = 0;
-let matchedCount = 0;
-let iconArray = [
-  'fa-archive',
-  'fa-bug',
-  'fa-code',
-  'fa-microchip',
-  'fa-coffee',
-  'fa-file',
-  'fa-terminal',
-  'fa-sitemap',
-  'fa-qrcode'
-]
-
 const gameOperations = {
-  setStats(matches) {
-    console.log(matches)
+  container: document.querySelector('.container'),
+  startGame() {
+    let iconArray = [
+      'fa-archive',
+      'fa-bug',
+      'fa-code',
+      'fa-microchip',
+      'fa-coffee',
+      'fa-file',
+      'fa-terminal',
+      'fa-sitemap',
+      'fa-qrcode'
+    ];
+    let cardArray = iconArray.concat(iconArray);
+    // Below variable used for testing purposes to prevent shuffling
+    // let shuffled = cardArray;
+    let shuffled = cardOperations.shuffleCard(cardArray);
+    cardArray.forEach(() => {
+      this.container.insertAdjacentHTML(
+        "beforeend", `<div class='card'><i class='fas'></i></div>`
+      );
+    });
+    Array.from(this.container.querySelectorAll(".fas")).forEach((fas, i) => {
+      fas.classList.add(shuffled[i]);
+      let ID = shuffled[i].split("-");
+      fas.parentElement.dataset.id = ID[1];
+    });
+    this.container.addEventListener("click", cardOperations.flipCard);
+  },
+  setStats(matches, attempts) {
+    const pct = document.getElementById('pct');
     pct.textContent = parseFloat((matches / attempts) * 100).toFixed(2);
   },
   resetGame() {
-    Array.from(container.querySelectorAll('.match')).forEach((match) => {
+    Array.from(this.container.querySelectorAll('.match')).forEach((match) => {
       match.classList.remove('match');
       match.classList.add('card');
     });
@@ -32,23 +41,29 @@ const gameOperations = {
 }
 
 const cardOperations = {
+  counter: 0,
+  attempts: 0,
+  matchedCount: 0,
   flipCard(event) {
     const cur = event.currentTarget;
     const tgt = event.target;
+    const tries = document.querySelector("#tries");
+    const gamesPlayed = document.getElementById('played');
+    let numOfCards = 18;
     if (tgt.classList.contains('card')) {
       tgt.classList.add('flip');
-      counter++;
+      cardOperations.counter++;
     }
-    if (counter === 2) {
-      counter = 0;
-      attempts++;
-      tries.textContent = attempts;
+    if (cardOperations.counter === 2) {
+      cardOperations.counter = 0;
+      cardOperations.attempts++;
+      tries.textContent = cardOperations.attempts;
       const pair = Array.from(cur.querySelectorAll('.flip'));
-      const ID = pair.map(card => card.dataset.id );
+      const ID = pair.map(card => card.dataset.id);
       setTimeout(() => {
         if (ID[0] === ID[1]) {
-          matchedCount++;
-          gameOperations.setStats(matchedCount);
+          cardOperations.matchedCount++;
+          gameOperations.setStats(cardOperations.matchedCount, cardOperations.attempts);
           pair.forEach((card) => {
             card.classList.add('match');
             card.classList.remove('flip');
@@ -66,7 +81,7 @@ const cardOperations = {
         }
       }, 750);
     }
-    gameOperations.setStats(matchedCount);
+    gameOperations.setStats(cardOperations.matchedCount, cardOperations.attempts);
   },
   shuffleCard(array) {
     for (let i = array.length - 1; i >= 0; i--) {
@@ -74,24 +89,9 @@ const cardOperations = {
       const temp = array[i];
       array[i] = array[j];
       array[j] = temp;
-      // array.splice(array[i], (array[Math.random() * i | 0] - 1));
     }
     return array;
   }
 };
 
-let cardArray = iconArray.concat(iconArray);
-let shuffled = cardArray;
-// let shuffled = cardOperations.shuffleCard(cardArray);
-for (let i = 0; i < cardArray.length; i++) {
-  container.insertAdjacentHTML(
-    "beforeend", `<div class='card'><i class='fas'></i></div>`
-  );
-}
-
-Array.from(container.querySelectorAll(".fas")).forEach((fas, i) => {
-  fas.classList.add(shuffled[i]);
-  let ID = shuffled[i].split("-");
-  fas.parentElement.dataset.id = ID[1];
-});
-container.addEventListener("click", cardOperations.flipCard);
+gameOperations.startGame();
