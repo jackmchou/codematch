@@ -1,0 +1,247 @@
+@-webkit-keyframes shadow-inset-center{
+  0% {-webkit-box-shadow:inset 0 0 0 0 transparent;
+    box-shadow:inset 0 0 0 0 transparent;
+  }
+  100%{
+    -webkit-box-shadow:inset 0 0 14px 0 rgba(0,0,0,.5);
+    box-shadow:inset 0 0 14px 0 rgba(0,0,0,.5);
+  }}
+@keyframes shadow-inset-center{
+  0%{
+    -webkit-box-shadow:inset 0 0 0 0 transparent;
+    box-shadow:inset 0 0 0 0 transparent;
+  }
+  100%{
+    -webkit-box-shadow:inset 0 0 14px 0 rgba(0,0,0,.5);
+    box-shadow:inset 0 0 14px 0 rgba(0,0,0,.5)
+  }}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  padding-top: 0.5rem;
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  background: linear-gradient(217deg, rgba(80,81,79,.8), rgba(80,81,79,0) 70.71%),
+              linear-gradient(127deg, rgba(52,0,104,.8), rgba(52,0,104,0) 70.71%),
+              linear-gradient(336deg, rgba(112,193,179,.8), rgba(112,193,179,0) 70.71%);
+}
+
+header {
+  min-width: 100%;
+  margin-bottom: 0.25rem;
+  padding: 0.25rem;
+  font-size: 2rem;
+  display:flex;
+  justify-content: space-evenly;
+  /* border: 1px solid red; */
+  box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+}
+
+.container {
+  height: 90vh;
+  max-width: 1200px;
+  padding: 1rem;
+  margin: 0 auto;
+  background: linear-gradient(227deg, rgba(80, 42, 250, 0.555) 0%, rgba(137, 255, 28, 0.575) 100%);
+  border-radius: 10px;
+  box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  /* align-items: center; */
+  /* align-content: center; */
+}
+.card, .match {
+  flex-basis: calc(100% / 6);
+  height: 200px;
+  margin: 0 0 0.25rem 0;
+  background: rgb(73, 73, 73);
+  font-size: 0;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+  transform: rotateY(0deg);
+  transition: 0.25s ease;  
+}
+
+.card:focus {
+  animation: shadow-inset-center 1s;
+}
+
+.match {
+  cursor: default;
+  background-color: #21D4FD;
+  background-image: linear-gradient(19deg, rgb(1, 43, 53) 0%, #B721FF 100%);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  font-size: 2.5rem;
+  transform: rotateY(180deg);
+ }
+
+.card.flip {
+  background-color: #8EC5FC;
+  background-image: linear-gradient(0deg, #8EC5FC 0%, #E0C3FC 100%);
+  font-size: 2.5rem;
+  cursor: default;
+  transform: rotateY(180deg);
+  transition: 0.25s ease;
+ }
+
+/* ----------- iPhone 6, 6S, 7 and 8 ----------- */
+
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2) { 
+
+}
+
+/* Portrait */
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) {
+    header {
+      font-size: 1rem;
+    }
+    .container {
+      height: 610px;
+      width: 300px;
+      padding: 1rem;
+    }
+    .card, .match {
+      flex-basis: calc(100% / 3.25);
+      height: 93px;
+      margin-bottom: 0.25rem;
+      border-radius: 50%;
+    }
+}
+
+/* Landscape */
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: landscape) { 
+    .container {
+      height: 310px;
+      width: 610px;
+      padding: 1rem;
+    }
+    .card, .match {
+      flex-basis: calc(100% / 6.75);
+      height: 91px;
+      margin-bottom: 0.25rem;
+      border-radius: 50%;
+    }
+}
+
+/* ----------- iPhone 6+, 7+ and 8+ ----------- */
+
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 414px) 
+  and (max-device-width: 736px) 
+  and (-webkit-min-device-pixel-ratio: 3) { 
+
+}
+
+/* Portrait */
+@media only screen 
+  and (min-device-width: 414px) 
+  and (max-device-width: 736px) 
+  and (-webkit-min-device-pixel-ratio: 3)
+  and (orientation: portrait) { 
+
+}
+
+/* Landscape */
+@media only screen 
+  and (min-device-width: 414px) 
+  and (max-device-width: 736px) 
+  and (-webkit-min-device-pixel-ratio: 3)
+  and (orientation: landscape) { 
+
+}
+
+/* ----------- iPhone X ----------- */
+
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 812px) 
+  and (-webkit-min-device-pixel-ratio: 3) { 
+
+}
+
+/* Portrait */
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 812px) 
+  and (-webkit-min-device-pixel-ratio: 3)
+  and (orientation: portrait) { 
+
+}
+
+/* Landscape */
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 812px) 
+  and (-webkit-min-device-pixel-ratio: 3)
+  and (orientation: landscape) { 
+
+}
+
+/* ----------- iPad 3, 4 and Pro 9.7" ----------- */
+
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (-webkit-min-device-pixel-ratio: 2) {
+
+}
+
+/* Portrait */
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (orientation: portrait) 
+  and (-webkit-min-device-pixel-ratio: 2) {
+    .container {
+      height: 950px;
+      width: 700px;
+      padding: 1rem;
+    }
+    .card, .match {
+      flex-basis: calc(100% / 4.5);
+      height: 175px;
+      margin: 0.25rem;
+      border-radius: 50%;
+    }
+}
+
+/* Landscape */
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (orientation: landscape) 
+  and (-webkit-min-device-pixel-ratio: 2) {
+    .container {
+      height: 310px;
+      width: 610px;
+      padding: 1rem;
+    }
+    .card, .match {
+      flex-basis: calc(100% / 6.75);
+      height: 91px;
+      margin-bottom: 0.25rem;
+      border-radius: 50%;
+    }
+}
