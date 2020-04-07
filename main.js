@@ -1,27 +1,27 @@
-const container = document.querySelector('.container');
 let numOfCards = 18;
 let counter = 0;
 let attempts = 0;
 let matchedCount = 0;
-let iconArray = [
-  'fa-archive',
-  'fa-bug',
-  'fa-code',
-  'fa-microchip',
-  'fa-coffee',
-  'fa-file',
-  'fa-terminal',
-  'fa-sitemap',
-  'fa-qrcode'
-]
 
 const gameOperations = {
+  container: document.querySelector('.container'),
   startGame() {
+    let iconArray = [
+      'fa-archive',
+      'fa-bug',
+      'fa-code',
+      'fa-microchip',
+      'fa-coffee',
+      'fa-file',
+      'fa-terminal',
+      'fa-sitemap',
+      'fa-qrcode'
+    ];
     let cardArray = iconArray.concat(iconArray);
     let shuffled = cardArray;
     // let shuffled = cardOperations.shuffleCard(cardArray);
     for (let i = 0; i < cardArray.length; i++) {
-      container.insertAdjacentHTML(
+      this.container.insertAdjacentHTML(
         "beforeend", `<div class='card'><i class='fas'></i></div>`
       );
     }
@@ -30,14 +30,14 @@ const gameOperations = {
       let ID = shuffled[i].split("-");
       fas.parentElement.dataset.id = ID[1];
     });
-    container.addEventListener("click", cardOperations.flipCard);
+    this.container.addEventListener("click", cardOperations.flipCard);
   },
   setStats(matches) {
     const pct = document.getElementById('pct');
     pct.textContent = parseFloat((matches / attempts) * 100).toFixed(2);
   },
   resetGame() {
-    Array.from(container.querySelectorAll('.match')).forEach((match) => {
+    Array.from(this.container.querySelectorAll('.match')).forEach((match) => {
       match.classList.remove('match');
       match.classList.add('card');
     });
@@ -89,7 +89,6 @@ const cardOperations = {
       const temp = array[i];
       array[i] = array[j];
       array[j] = temp;
-      // array.splice(array[i], (array[Math.random() * i | 0] - 1));
     }
     return array;
   }
