@@ -1,7 +1,4 @@
 const container = document.querySelector('.container');
-const tries = document.querySelector("#tries");
-const gamesPlayed = document.getElementById('played');
-const pct = document.getElementById('pct');
 let numOfCards = 18;
 let counter = 0;
 let attempts = 0;
@@ -19,8 +16,24 @@ let iconArray = [
 ]
 
 const gameOperations = {
+  startGame() {
+    let cardArray = iconArray.concat(iconArray);
+    let shuffled = cardArray;
+    // let shuffled = cardOperations.shuffleCard(cardArray);
+    for (let i = 0; i < cardArray.length; i++) {
+      container.insertAdjacentHTML(
+        "beforeend", `<div class='card'><i class='fas'></i></div>`
+      );
+    }
+    Array.from(container.querySelectorAll(".fas")).forEach((fas, i) => {
+      fas.classList.add(shuffled[i]);
+      let ID = shuffled[i].split("-");
+      fas.parentElement.dataset.id = ID[1];
+    });
+    container.addEventListener("click", cardOperations.flipCard);
+  },
   setStats(matches) {
-    console.log(matches)
+    const pct = document.getElementById('pct');
     pct.textContent = parseFloat((matches / attempts) * 100).toFixed(2);
   },
   resetGame() {
@@ -35,6 +48,8 @@ const cardOperations = {
   flipCard(event) {
     const cur = event.currentTarget;
     const tgt = event.target;
+    const tries = document.querySelector("#tries");
+    const gamesPlayed = document.getElementById('played');
     if (tgt.classList.contains('card')) {
       tgt.classList.add('flip');
       counter++;
@@ -44,7 +59,7 @@ const cardOperations = {
       attempts++;
       tries.textContent = attempts;
       const pair = Array.from(cur.querySelectorAll('.flip'));
-      const ID = pair.map(card => card.dataset.id );
+      const ID = pair.map(card => card.dataset.id);
       setTimeout(() => {
         if (ID[0] === ID[1]) {
           matchedCount++;
@@ -80,18 +95,4 @@ const cardOperations = {
   }
 };
 
-let cardArray = iconArray.concat(iconArray);
-let shuffled = cardArray;
-// let shuffled = cardOperations.shuffleCard(cardArray);
-for (let i = 0; i < cardArray.length; i++) {
-  container.insertAdjacentHTML(
-    "beforeend", `<div class='card'><i class='fas'></i></div>`
-  );
-}
-
-Array.from(container.querySelectorAll(".fas")).forEach((fas, i) => {
-  fas.classList.add(shuffled[i]);
-  let ID = shuffled[i].split("-");
-  fas.parentElement.dataset.id = ID[1];
-});
-container.addEventListener("click", cardOperations.flipCard);
+gameOperations.startGame();
