@@ -1,8 +1,3 @@
-let numOfCards = 18;
-let counter = 0;
-let attempts = 0;
-let matchedCount = 0;
-
 const gameOperations = {
   container: document.querySelector('.container'),
   startGame() {
@@ -18,21 +13,22 @@ const gameOperations = {
       'fa-qrcode'
     ];
     let cardArray = iconArray.concat(iconArray);
+    // Below variable used for testing purposes to prevent shuffling
     let shuffled = cardArray;
     // let shuffled = cardOperations.shuffleCard(cardArray);
-    for (let i = 0; i < cardArray.length; i++) {
+    cardArray.forEach(() => {
       this.container.insertAdjacentHTML(
         "beforeend", `<div class='card'><i class='fas'></i></div>`
       );
-    }
-    Array.from(container.querySelectorAll(".fas")).forEach((fas, i) => {
+    });
+    Array.from(this.container.querySelectorAll(".fas")).forEach((fas, i) => {
       fas.classList.add(shuffled[i]);
       let ID = shuffled[i].split("-");
       fas.parentElement.dataset.id = ID[1];
     });
     this.container.addEventListener("click", cardOperations.flipCard);
   },
-  setStats(matches) {
+  setStats(matches, attempts) {
     const pct = document.getElementById('pct');
     pct.textContent = parseFloat((matches / attempts) * 100).toFixed(2);
   },
@@ -45,25 +41,29 @@ const gameOperations = {
 }
 
 const cardOperations = {
+  counter: 0,
+  attempts: 0,
+  matchedCount: 0,
   flipCard(event) {
     const cur = event.currentTarget;
     const tgt = event.target;
     const tries = document.querySelector("#tries");
     const gamesPlayed = document.getElementById('played');
+    let numOfCards = 18;
     if (tgt.classList.contains('card')) {
       tgt.classList.add('flip');
-      counter++;
+      cardOperations.counter++;
     }
-    if (counter === 2) {
-      counter = 0;
-      attempts++;
-      tries.textContent = attempts;
+    if (cardOperations.counter === 2) {
+      cardOperations.counter = 0;
+      cardOperations.attempts++;
+      tries.textContent = cardOperations.attempts;
       const pair = Array.from(cur.querySelectorAll('.flip'));
       const ID = pair.map(card => card.dataset.id);
       setTimeout(() => {
         if (ID[0] === ID[1]) {
-          matchedCount++;
-          gameOperations.setStats(matchedCount);
+          cardOperations.matchedCount++;
+          gameOperations.setStats(cardOperations.matchedCount, cardOperations.attempts);
           pair.forEach((card) => {
             card.classList.add('match');
             card.classList.remove('flip');
@@ -81,7 +81,7 @@ const cardOperations = {
         }
       }, 750);
     }
-    gameOperations.setStats(matchedCount);
+    gameOperations.setStats(cardOperations.matchedCount, cardOperations.attempts);
   },
   shuffleCard(array) {
     for (let i = array.length - 1; i >= 0; i--) {
