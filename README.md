@@ -5,6 +5,11 @@ A software development themed memory match game built using HTML, CSS, and JavaS
 - HTML
 - CSS
 - JavaScript
+- FontAwesome
+- GoogleFonts
+
+## Live Demo
+[codematch](https://memory-match.jackmchou.com/)
 
 ## Features
 - User Can View Game
@@ -13,10 +18,13 @@ A software development themed memory match game built using HTML, CSS, and JavaS
 - User Can Win Game
 - User Can View Stats
 - User Can Reset Game and Play Again
+- V2 -- _in progress, stay tuned!_
 
 ## Preview
+![codematch Preview](preview.gif "codematch Preview")
 
 ## Development
+
 #### System Requirements
 |   Requirement   |     Version      |
 |-----------------|-----------------:|

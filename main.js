@@ -14,8 +14,8 @@ const gameOperations = {
     ];
     let cardArray = iconArray.concat(iconArray);
     // Below variable used for testing purposes to prevent shuffling
-    let shuffled = cardArray;
-    // let shuffled = cardOperations.shuffleCard(cardArray);
+    // let shuffled = cardArray;
+    let shuffled = cardOperations.shuffleCard(cardArray);
     cardArray.forEach(() => {
       this.container.insertAdjacentHTML(
         "beforeend", `<div class='card'><i class='fas'></i></div>`
