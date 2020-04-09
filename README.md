@@ -1,5 +1,5 @@
 # codematch
-A software development themed memory match game built using HTML, CSS, and JavaScript
+A mobile first, software development themed memory match game built using HTML, CSS, and JavaScript
 
 ## Technologies Used
 - HTML
@@ -7,6 +7,7 @@ A software development themed memory match game built using HTML, CSS, and JavaS
 - JavaScript
 - FontAwesome
 - GoogleFonts
+- Amazon Web Services EC2
 
 ## Live Demo
 [codematch](https://memory-match.jackmchou.com/)
