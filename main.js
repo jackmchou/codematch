@@ -30,7 +30,7 @@ const gameOperations = {
   },
   setStats(matches, attempts) {
     const pct = document.getElementById('pct');
-    pct.textContent = parseFloat((matches / attempts) * 100).toFixed(2);
+    pct.textContent = `${parseFloat((matches / attempts) * 100).toFixed(2)}%`;
   },
   resetGame() {
     Array.from(this.container.querySelectorAll('.match')).forEach((match) => {
