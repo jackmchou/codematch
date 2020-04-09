@@ -151,6 +151,9 @@ header {
       height: 2.5rem;
       font-size: 2rem;
     }
+    .card.flip {
+      font-size: 3rem;
+    }
 }
 
 /* Portrait */
@@ -160,14 +163,14 @@ header {
   and (orientation: portrait) 
   and (-webkit-min-device-pixel-ratio: 2) {
     .container {
-      height: 950px;
+      height: 800px;
       width: 700px;
       padding: 1rem;
     }
     .card, .match {
-      flex-basis: calc(100% / 6);
+      flex-basis: calc(100% / 7);
       height: 175px;
-      margin: 0.0009rem;
+      margin: 0.025rem;
       border-radius: 0;
     }
 }
@@ -179,15 +182,14 @@ header {
   and (orientation: landscape) 
   and (-webkit-min-device-pixel-ratio: 2) {
     .container {
-      height: 310px;
-      width: 610px;
+      height: 700px;
+      width: 900px;
       padding: 1rem;
     }
     .card, .match {
       flex-basis: calc(100% / 6.75);
-      height: 91px;
+      height: 133px;
       margin-bottom: 0.25rem;
-      border-radius: 50%;
     }
 }
 
