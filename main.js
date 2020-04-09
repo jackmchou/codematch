@@ -30,7 +30,8 @@ const gameOperations = {
   },
   setStats(matches, attempts) {
     const pct = document.getElementById('pct');
-    pct.textContent = `${parseFloat((matches / attempts) * 100).toFixed(2)}%`;
+    const accuracy = parseFloat((matches / attempts) * 100).toFixed(2);
+    pct.textContent = `${isNaN(accuracy) ? '0' : accuracy}%`;
   },
   resetGame() {
     Array.from(this.container.querySelectorAll('.match')).forEach((match) => {
