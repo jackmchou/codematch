@@ -70,6 +70,8 @@ const cardOperations = {
             card.classList.remove('flip');
             card.classList.remove('card');
             const matchedElements = document.querySelectorAll('.match');
+            const ele = document.getElementsByClassName('match')[0]
+            console.log(ele)
             if (matchedElements.length === numOfCards) {
               gamesPlayed.textContent++;
               gameOperations.resetGame();

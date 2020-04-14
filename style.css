@@ -21,9 +21,7 @@ body {
   width: 100vw;
   padding-top: 0.5rem;
   font-family: 'Barlow Semi Condensed', sans-serif;
-  background: linear-gradient(217deg, rgba(80,81,79,.8), rgba(80,81,79,0) 70.71%),
-              linear-gradient(127deg, rgba(52,0,104,.8), rgba(52,0,104,0) 70.71%),
-              linear-gradient(336deg, rgba(112,193,179,.8), rgba(112,193,179,0) 70.71%);
+  background: #1E1E1E;
 }
 
 header {
@@ -34,27 +32,25 @@ header {
   font-size: 2rem;
   display:flex;
   justify-content: space-evenly;
-  box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+  box-shadow: 5px 2px 20px 0 rgba(45, 45, 45, 0.5);
 }
 
 .container {
   height: 90vh;
-  max-width: 90rem;
+  max-width: 95rem;
   padding: 0.5rem 1rem;
   margin: 0 auto;
-  background: linear-gradient(227deg, rgba(80, 42, 250, 0.555) 0%, rgba(137, 255, 28, 0.575) 100%);
+  background: #e8f1f2;
   border-radius: 10px;
-  box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
 }
 
 .card, .match {
-  flex-basis: calc(100% / 6);
-  height: 15rem;
-  margin: 0 0 0.25rem 0;
-  background: rgb(73, 73, 73);
+  flex-basis: calc(100% / 6.5);
+  height: 14.6rem;
+  background: #394648;
   font-size: 0;
   border-radius: 50%;
   display: flex;
@@ -72,12 +68,15 @@ header {
 
 .match {
   cursor: default;
-  background-color: #21D4FD;
-  background-image: linear-gradient(19deg, rgb(39, 95, 109) 0%, #B721FF 100%);
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
+  background-image: linear-gradient(
+    to right,
+  rgb(194, 255, 182),
+  rgb(162, 209, 255),
+  rgb(221, 169, 255),
+  rgb(162, 146, 255),
+  rgb(193, 211, 197)
+  );
+  background-size: 200%;
   font-size: 5rem;
   transform: rotateY(180deg);
  }
@@ -90,6 +89,20 @@ header {
   transform: rotateY(180deg);
   transition: 0.25s ease;
  }
+
+/* ---------------- Desktop --------------------- */
+@media (min-width: 500px) and (max-width: 1280px) {
+  header {
+    font-size: 1.25rem;
+    height: 1.5rem;
+  }
+  .card, .match {
+    flex-basis: calc(100% / 6.5);
+    height: 14rem;
+    margin-bottom: 0.25rem;
+    border-radius: 0;
+  }
+}
 
 /* ----------- iPhone 6, 6S, 7 and 8 ----------- */
 
