@@ -1,0 +1,25 @@
+{
+  "name": "codematch",
+  "version": "1.0.0",
+  "description": "A mobile first, software development themed memory match game built using HTML, CSS, and JavaScript",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jackmchou/codematch.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jackmchou/codematch/issues"
+  },
+  "homepage": "https://github.com/jackmchou/codematch#readme",
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "standard": "^14.3.3"
+  },
+  "dependencies": {}
+}
