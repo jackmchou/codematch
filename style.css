@@ -100,7 +100,7 @@ header {
     flex-basis: calc(100% / 6.5);
     height: 14rem;
     margin-bottom: 0.25rem;
-    border-radius: 0;
+    border-radius: 10px;
   }
 }
 
@@ -195,7 +195,7 @@ header {
       flex-basis: calc(100% / 7);
       height: 175px;
       margin: 0.025rem;
-      border-radius: 0;
+      border-radius: 7px;
     }
 }
 
