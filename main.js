@@ -34,6 +34,7 @@ const gameOperations = {
     // let shuffled = cardArray;
     const shuffled = cardOperations.shuffleCard(cardArray)
     Array.from(this.container.querySelectorAll('.fas')).forEach((fas, idx) => {
+      fas.classList.value = 'fas'
       fas.classList.add(shuffled[idx])
       const ID = shuffled[idx].split('-')
       fas.parentElement.dataset.id = ID[1]
@@ -52,6 +53,7 @@ const gameOperations = {
     document.getElementById('startOver').addEventListener('click', () => {
       this.modal.classList.add('hidden')
       document.getElementById('played').textContent = 0
+      document.querySelector('#tries').textContent = 0
       this.setStats(0, 0)
       this.resetCards();
     })
