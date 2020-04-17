@@ -1,42 +1,59 @@
 const gameOperations = {
   container: document.querySelector('.container'),
+  modal: document.getElementById('winModal'),
+  iconArray: [
+    'fa-archive',
+    'fa-bug',
+    'fa-code',
+    'fa-microchip',
+    'fa-coffee',
+    'fa-file',
+    'fa-terminal',
+    'fa-sitemap',
+    'fa-qrcode'
+  ],
   startGame() {
-    const iconArray = [
-      'fa-archive',
-      'fa-bug',
-      'fa-code',
-      'fa-microchip',
-      'fa-coffee',
-      'fa-file',
-      'fa-terminal',
-      'fa-sitemap',
-      'fa-qrcode'
-    ]
-    const cardArray = iconArray.concat(iconArray)
-    // Below variable used for testing purposes to prevent shuffling
-    // let shuffled = cardArray;
-    const shuffled = cardOperations.shuffleCard(cardArray)
+    const cardArray = this.iconArray.concat(this.iconArray)
     cardArray.forEach(() => {
       this.container.insertAdjacentHTML(
         'beforeend', '<div class=\'card\'><i class=\'fas\'></i></div>'
       )
     })
-    Array.from(this.container.querySelectorAll('.fas')).forEach((fas, i) => {
-      fas.classList.add(shuffled[i])
-      const ID = shuffled[i].split('-')
-      fas.parentElement.dataset.id = ID[1]
-    })
+    this.resetCards();
     this.container.addEventListener('click', cardOperations.flipCard)
+    this.gameResetOptions();
   },
   setStats(matches, attempts) {
     const pct = document.getElementById('pct')
     const accuracy = parseFloat((matches / attempts) * 100).toFixed(2)
     pct.textContent = `${isNaN(accuracy) ? '0' : accuracy}%`
   },
-  resetGame() {
-    Array.from(this.container.querySelectorAll('.match')).forEach((match) => {
+  resetCards() {
+    const cardArray = this.iconArray.concat(this.iconArray)
+    // Below variable used for testing purposes to prevent shuffling
+    // let shuffled = cardArray;
+    const shuffled = cardOperations.shuffleCard(cardArray)
+    Array.from(this.container.querySelectorAll('.fas')).forEach((fas, idx) => {
+      fas.classList.add(shuffled[idx])
+      const ID = shuffled[idx].split('-')
+      fas.parentElement.dataset.id = ID[1]
+    })
+    Array.from(this.container.querySelectorAll('.match')).forEach(match => {
       match.classList.remove('match')
       match.classList.add('card')
+    })
+  },
+  gameResetOptions() {
+    document.getElementById('playAgain').addEventListener('click', () => {
+      this.modal.classList.add('hidden')
+      document.getElementById('played').textContent++
+      this.resetCards();
+    })
+    document.getElementById('startOver').addEventListener('click', () => {
+      this.modal.classList.add('hidden')
+      document.getElementById('played').textContent = 0
+      this.setStats(0, 0)
+      this.resetCards();
     })
   }
 }
@@ -50,7 +67,6 @@ const cardOperations = {
     if (this.isProcessing) return
     const { currentTarget, target } = event
     const tries = document.querySelector('#tries')
-    const gamesPlayed = document.getElementById('played')
     if (target.classList.contains('flip')) return
     target.classList.add('flip')
     if (!this.firstCardClicked) this.firstCardClicked = target
@@ -65,8 +81,8 @@ const cardOperations = {
           card.classList.add('match')
           card.classList.remove('flip', 'card')
           if (document.querySelectorAll('.match').length === 18) {
-            gamesPlayed.textContent++
-            gameOperations.resetGame()
+            document.getElementById('played').textContent++
+            gameOperations.modal.classList.remove('hidden')
           }
         })
         this.firstCardClicked = null
