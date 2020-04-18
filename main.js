@@ -12,23 +12,23 @@ const gameOperations = {
     'fa-sitemap',
     'fa-qrcode'
   ],
-  startGame() {
+  startGame () {
     const cardArray = this.iconArray.concat(this.iconArray)
     cardArray.forEach(() => {
       this.container.insertAdjacentHTML(
         'beforeend', '<div class=\'card\'><i class=\'fas\'></i></div>'
       )
     })
-    this.resetCards();
+    this.resetCards()
     this.container.addEventListener('click', cardOperations.flipCard)
-    this.gameResetOptions();
+    this.gameResetOptions()
   },
-  setStats(matches, attempts) {
+  setStats (matches, attempts) {
     const pct = document.getElementById('pct')
     const accuracy = parseFloat((matches / attempts) * 100).toFixed(2)
     pct.textContent = `${isNaN(accuracy) ? '0' : accuracy}%`
   },
-  resetCards() {
+  resetCards () {
     const cardArray = this.iconArray.concat(this.iconArray)
     // Below variable used for testing purposes to prevent shuffling
     // let shuffled = cardArray;
@@ -44,18 +44,18 @@ const gameOperations = {
       match.classList.add('card')
     })
   },
-  gameResetOptions() {
+  gameResetOptions () {
     document.getElementById('playAgain').addEventListener('click', () => {
       this.modal.classList.add('hidden')
       document.getElementById('played').textContent++
-      this.resetCards();
+      this.resetCards()
     })
     document.getElementById('startOver').addEventListener('click', () => {
       this.modal.classList.add('hidden')
       document.getElementById('played').textContent = 0
       document.querySelector('#tries').textContent = 0
       this.setStats(0, 0)
-      this.resetCards();
+      this.resetCards()
     })
   }
 }
@@ -65,7 +65,7 @@ const cardOperations = {
   matchedCount: 0,
   firstCardClicked: null,
   isProcessing: false,
-  flipCard(event) {
+  flipCard (event) {
     if (this.isProcessing) return
     const { currentTarget, target } = event
     const tries = document.querySelector('#tries')
@@ -95,12 +95,12 @@ const cardOperations = {
           pair.forEach(card => card.classList.remove('flip'))
           this.firstCardClicked = null
           this.isProcessing = false
-        }, 750);
+        }, 750)
       }
     }
     gameOperations.setStats(cardOperations.matchedCount, cardOperations.attempts)
   },
-  shuffleCard(array) {
+  shuffleCard (array) {
     for (let i = array.length - 1; i >= 0; i--) {
       const j = Math.random() * i | 0
       const temp = array[i]
