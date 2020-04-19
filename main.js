@@ -83,7 +83,6 @@ const cardOperations = {
           card.classList.add('match')
           card.classList.remove('flip', 'card')
           if (document.querySelectorAll('.match').length === 18) {
-            document.getElementById('played').textContent++
             gameOperations.modal.classList.remove('hidden')
           }
         })
