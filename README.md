@@ -34,7 +34,7 @@ A mobile first, software development themed memory match game built using HTML, 
 #### System Requirements
 |   Requirement   |     Version      |
 |-----------------|-----------------:|
-| Visual Studio Code|  1.43 or higher  |
+| None            |  N/A             |
 
 #### Getting Started
 1. Clone the repository
@@ -45,4 +45,4 @@ A mobile first, software development themed memory match game built using HTML, 
   ```shell
   cd codematch/
   ```
-3. Open with Live Server in VS Code via ```index.html```
+3. Open ```index.html``` in browser of choice
