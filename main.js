@@ -76,9 +76,6 @@ const cardOperations = {
       const pair = Array.from(currentTarget.querySelectorAll('.flip'))
       const ID = pair.map(card => card.dataset.id)
       if (ID[0] === ID[1]) {
-        tries.textContent = ++cardOperations.attempts
-        cardOperations.matchedCount++
-        gameOperations.setStats(cardOperations.matchedCount, cardOperations.attempts)
         pair.forEach((card) => {
           card.classList.add('match')
           card.classList.remove('flip', 'card')
@@ -86,6 +83,9 @@ const cardOperations = {
             gameOperations.modal.classList.remove('hidden')
           }
         })
+        tries.textContent = ++cardOperations.attempts
+        cardOperations.matchedCount++
+        gameOperations.setStats(cardOperations.matchedCount, cardOperations.attempts)
         this.firstCardClicked = null
       } else {
         tries.textContent = ++cardOperations.attempts
